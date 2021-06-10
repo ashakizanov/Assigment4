@@ -1,0 +1,63 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Assig4 { 
+  static class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+  }
+
+  static TreeNode funNew(int n){
+      TreeNode node;
+      node = new TreeNode();
+      node.val = n;
+      node.left = null;
+      node.right = null;
+      return node;
+  }
+
+  public static int deepestLeavesSum(TreeNode node){
+
+      if (node== null) {
+          return 0;
+      }
+
+      Queue<TreeNode> temp= new LinkedList<>();
+
+      temp.offer(node);
+
+      int sum= 0;
+
+      while (!temp.isEmpty()) {
+          int size = temp.size();
+          sum = 0;
+          while (size-- > 0) {
+              TreeNode head = temp.poll();
+              sum += head.val;
+ 
+              if (head.left!= null) {
+                  temp.offer(head.left);
+              }
+
+              if (head.right!= null) {
+                  temp.offer(head.right);
+              }
+          }
+      }
+      return sum;
+  }
+  public static void main(String[] args){
+      Tree tree = new Tree();
+      tree.node = funNew(1);
+      tree.node.left = funNew(2);
+      tree.node.right = funNew(3);
+      tree. node.left.left = funNew(4);
+      tree.node.left.right = funNew(5);
+      tree.node.right.right = funNew(6);
+      tree.node.left.left.left= funNew(7);
+      tree.node.right.right.right = funNew(8);
+      System.out.println(deepestLeavesSum(tree.node));
+  }
+
+}
